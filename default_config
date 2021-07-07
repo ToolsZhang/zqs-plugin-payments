@@ -1,0 +1,52 @@
+import { IContext } from 'zqs-core/lib/context';
+import { IConfig, EChannel, ECurrency, IChargeDocument } from 'zqs-plugin-payments';
+import { Client, EClientSignType } from zqs-plugin-payments/alipay';
+
+export const development: IConfig = {
+  roles: ['payments'],
+  payments: [
+    {
+      path: 'order',
+      channels: [EChannel.alipay],
+      currencies: [ECurrency.cny],
+      parameters: {
+        orderId: {
+          type: 'string',
+          description: 'order id',
+        },
+        channel: {
+          type: 'string',
+          description: 'channel. ["alipay"]',
+        },
+      },
+      charge: async (ctx: IContext): Promise<IChargeDocument> => {
+        const order: any = 'xxx';
+        return {
+          channel: ctx.request.fields.channel,
+          currency: ECurrency.cny,
+          client_ip: ctx.request.ip,
+          subject: order.subject,
+          body: order.body,
+          amount: order.price,
+          extra: {
+            orderId: order._id,
+          },
+          __auth: ctx.request.auth._id,
+        };
+      },
+      chargeWebhook: async (doc: IChargeDocument): Promise<void> => {
+        const order: any = 'xxx by doc.extra.orderId';
+        order.status = 'paid';
+        await order.save()
+      },
+      alipayClient: new Client({
+        appId: 'xxx',
+        rsaPrivate: 'xxx',
+        rsaPublic: 'xxx',
+        signType: EClientSignType.RSA2,
+        sandbox: true
+      }),
+      https: false
+    },
+  ],
+};

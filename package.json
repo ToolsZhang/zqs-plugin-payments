@@ -1,0 +1,79 @@
+{
+  "name": "zqs-plugin-payments",
+  "version": "1.0.1",
+  "description": "an payment collection for zqs framework",
+  "main": "lib/index.js",
+  "scripts": {
+    "clean": "rimraf lib && rimraf coverage",
+    "format": "prettier --write \"{src,__tests__}/**/*.ts\" --single-quote --trailing-comma es5",
+    "lint": "tslint --force --format verbose \"src/**/*.ts\"",
+    "prepublish": "npm run build",
+    "prebuild": "npm run clean && npm run format && npm run lint && echo Using TypeScript && tsc --version",
+    "build": "tsc --pretty",
+    "test": "jest",
+    "coverage": "jest --coverage",
+    "watch": "npm run build -- --watch",
+    "watch:test": "jest --watch"
+  },
+  "files": [
+    "lib",
+    "default_config"
+  ],
+  "typings": "lib/index.d.ts",
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "jest": {
+    "transform": {
+      ".(ts)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/__tests__/.*-spec|\\.(test|spec))\\.(ts|js)$",
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ],
+    "testEnvironment": "node",
+    "mapCoverage": true
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ToolsZhang/zqs-plugin-payments.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ToolsZhang/zqs-plugin-payments/issues"
+  },
+  "homepage": "https://github.com/ToolsZhang/zqs-plugin-payments#readme",
+  "dependencies": {
+    "@types/ip6addr": "^0.2.2",
+    "ip6addr": "^0.2.2",
+    "moment": "^2.19.2",
+    "nhm": "0.0.3",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.5",
+    "xml2js": "^0.4.23"
+  },
+  "devDependencies": {
+    "@types/request-promise": "^4.1.45",
+    "@types/xml2js": "^0.4.5",
+    "@types/jest": "^20.0.5",
+    "@types/node": "^8.0.0",
+    "zqs-core": "^0.0.10",
+    "babel-core": "^6.26.3",
+    "babel-jest": "^24.9.0",
+    "babel-preset-env": "^1.7.0",
+    "coveralls": "^2.0.0",
+    "jest": "^20.0.4",
+    "jest-environment-node-debug": "^2.0.0",
+    "prettier": "^1.19.1",
+    "regenerator-runtime": "^0.13.3",
+    "rimraf": "^2.0.0",
+    "ts-jest": "^20.0.7",
+    "ts-node": "^3.2.0",
+    "tslint": "^5.20.1",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.7.4"
+  }
+}
