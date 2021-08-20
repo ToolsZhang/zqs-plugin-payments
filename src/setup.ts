@@ -7,10 +7,10 @@ import { setupRouter } from './router'
 export const setup = {
     async pre(app: Zqs): Promise<Router[]> {
         console.log(
-            `[${colors.green(moment().format('YY-MM-DD HH:mm:ss'))}] Setup plugin ${colors.cyan('allpayments')}`
+            `[${colors.green(moment().format('YY-MM-DD HH:mm:ss'))}] Setup plugin ${colors.cyan('payments')}`
         )
         try {
-            const configPath = app.dir + '/plugins/allpayments'
+            const configPath = app.dir + '/plugins/payments'
             app.config.payments = require(configPath)[process.env.NODE_ENV]
             const routers = await setupRouter(app)
             console.log(routers)
